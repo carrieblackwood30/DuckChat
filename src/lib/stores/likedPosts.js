@@ -3,9 +3,9 @@ import { databases } from "../appwrite";
 import { reactive } from "vue";
 
 export const IDEAS_DATABASE_ID = "667bd3ac0039782499f8"; // Replace with your database ID
-export const IDEAS_COLLECTION_ID = "667bd3d8001061505834"; // Replace with your collection ID
+export const IDEAS_COLLECTION_ID = "66850d84002521de01ba"; // Replace with your collection ID
 
-export const posts = reactive({
+export const likedPosts = reactive({
   current: [],
   async init() {
     const response = await databases.listDocuments(
@@ -14,7 +14,6 @@ export const posts = reactive({
       [Query.orderDesc("$createdAt"), Query.limit(10)],
       [Permission.read(Role.any())]
     );
-      
 
     this.current = response.documents;
   },
@@ -32,19 +31,4 @@ export const posts = reactive({
     this.current = this.current.filter((post) => post.$id !== id);
     await this.init(); // Refetch ideas to ensure we have 10 items
   },
-
-  async update(postId, like){
-    const result = await databases.updateDocument(
-      '667bd3ac0039782499f8', // databaseId
-      '667bd3d8001061505834', // collectionId
-      postId, // documentId
-      {
-        likes: like
-      }, // data (optional)
-      [
-        Permission.read(Role.any()),
-        Permission.update(Role.any())
-      ] // permissions (optional)
-  )
-  }
 });

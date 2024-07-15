@@ -2,7 +2,7 @@
     <div class="bg-white flex justify-between items-center px-24 py-2 border-b border-[#35353548]">
         <RouterLink to="/" class="h-fit">
             <div class="bg-[#116592] text-white p-1 rounded w-fit">
-                Duck 'n Chat
+                Duck 'n Quote
             </div>
         </RouterLink>
 
